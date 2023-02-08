@@ -10,9 +10,13 @@ const App = () => {
 
   const [todoTitle, setTodoTitle] = useState('')
 
+  const handleAddFormChange = (e) => {
+    setTodoTitle(e.target.value)
+  }
+
   return (
     <>
-      <input type='text' label='タイトル' />
+      <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
       <button>作成</button>
       <ul>
         {todos.map((todo) => (
