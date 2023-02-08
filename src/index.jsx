@@ -18,8 +18,8 @@ const App = () => {
     setTodoId(todoId + 1)
     setTodoTitle('')
   }
-  const handleDeleteTodo = () => {
-
+  const handleDeleteTodo = (targetTodo) => {
+    setTodos(todos.filter((todo) => targetTodo !== todo))
   }
 
   return (
