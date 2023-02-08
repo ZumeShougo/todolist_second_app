@@ -21,9 +21,15 @@ const App = () => {
 
   return (
     <>
-      <input type='text' label='新しいタイトル' />
-      <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
-      <button onClick={handleAddTodo}>作成</button>
+      <div>
+        <input type='text' label='新しいタイトル' />
+        <button>編集を保存</button>
+        <button>キャンセル</button>
+      </div>
+      <div>
+        <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
+        <button onClick={handleAddTodo}>作成</button>
+      </div>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
