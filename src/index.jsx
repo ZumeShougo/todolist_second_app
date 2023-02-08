@@ -6,6 +6,7 @@ const App = () => {
   ])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
+  const [isEditable, setIsEditable] = useState(true)
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
@@ -21,15 +22,17 @@ const App = () => {
 
   return (
     <>
+      {isEditable ? (
       <div>
         <input type='text' label='新しいタイトル' />
         <button>編集を保存</button>
         <button>キャンセル</button>
       </div>
+      ) : (
       <div>
         <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
         <button onClick={handleAddTodo}>作成</button>
-      </div>
+      </div>)}
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
