@@ -6,7 +6,7 @@ const App = () => {
   ])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
-  const [isEditable, setIsEditable] = useState(true)
+  const [isEditable, setIsEditable] = useState(false)
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
@@ -19,6 +19,12 @@ const App = () => {
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => targetTodo !== todo))
   }
+  const handleEditOpenForm = () => {
+    setIsEditable(true)
+  }
+  const handleEditCloseForm = () => {
+    setIsEditable(false)
+  }
 
   return (
     <>
@@ -26,7 +32,7 @@ const App = () => {
       <div>
         <input type='text' label='新しいタイトル' />
         <button>編集を保存</button>
-        <button>キャンセル</button>
+        <button onClick={handleEditCloseForm}>キャンセル</button>
       </div>
       ) : (
       <div>
@@ -37,7 +43,7 @@ const App = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
-            <button>編集</button>
+            <button onClick={handleEditOpenForm}>編集</button>
             <button onClick={() => handleDeleteTodo(todo)}>削除</button>
           </li>
         ))}
