@@ -9,15 +9,21 @@ const App = () => {
   ])
 
   const [todoTitle, setTodoTitle] = useState('')
+  const [todoId, setTodoId] = useState(todos.length + 1)
 
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
+  }
+  const handleAddTodo = () => {
+    setTodos([...todos, { id: todoId, title: todoTitle}])
+    setTodoId(todoId + 1)
+    setTodoTitle('')
   }
 
   return (
     <>
       <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
-      <button>作成</button>
+      <button onClick={handleAddTodo}>作成</button>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
