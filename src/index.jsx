@@ -10,9 +10,8 @@ const App = () => {
 
   return (
     <>
-      {/* 問題1. inputとボタンを設置しよう */}
-
-      {/* ここまで */}
+      <input type='text' label='タイトル' />
+      <button>作成</button>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
