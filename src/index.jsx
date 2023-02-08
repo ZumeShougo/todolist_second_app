@@ -7,10 +7,9 @@ const App = () => {
     { id: 2, title: '論文提出' },
     { id: 3, title: '市役所に住民票の写しをもらいに行く' }
   ])
-
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
-
+  //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
   }
@@ -18,6 +17,9 @@ const App = () => {
     setTodos([...todos, { id: todoId, title: todoTitle}])
     setTodoId(todoId + 1)
     setTodoTitle('')
+  }
+  const handleDeleteTodo = () => {
+
   }
 
   return (
@@ -28,6 +30,7 @@ const App = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
+            <button onChange={() => handleDeleteTodo(todo)}>削除</button>
           </li>
         ))}
       </ul>
