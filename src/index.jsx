@@ -7,6 +7,7 @@ const App = () => {
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
   const [isEditable, setIsEditable] = useState(false)
+  const [editId, setEditId] = useState('')
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
@@ -19,11 +20,13 @@ const App = () => {
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => targetTodo !== todo))
   }
-  const handleEditOpenForm = () => {
+  const handleEditOpenForm = (todo) => {
     setIsEditable(true)
+    setEditId(todo.id)
   }
   const handleEditCloseForm = () => {
     setIsEditable(false)
+    setEditId('')
   }
 
   return (
@@ -43,7 +46,7 @@ const App = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
-            <button onClick={handleEditOpenForm}>編集</button>
+            <button onClick={() => handleEditOpenForm(todo)}>編集</button>
             <button onClick={() => handleDeleteTodo(todo)}>削除</button>
           </li>
         ))}
