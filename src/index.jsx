@@ -41,7 +41,7 @@ const App = () => {
     handleEditCloseForm('')
   }
   const handleStatusChange = (targetTodo, e) => {
-    const newArray = todos.map((todo) => todo.id === target.id ? { ...todo, status: e.target.value } : todo)
+    const newArray = todos.map((todo) => todo.id === targetTodo.id ? { ...todo, status: e.target.value } : todo)
     setTodos(newArray)
   }
 
@@ -62,7 +62,7 @@ const App = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
-            <select value={todo.status} onClick={(e) => handleStatusChange(todo, e)}>
+            <select value={todo.status} onChange={(e) => handleStatusChange(todo, e)}>
               <option value='notStarted'>未着手</option>
               <option value='inProgress'>作業中</option>
               <option value='done'>完了</option>
