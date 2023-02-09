@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const App = () => {
   const [todos, setTodos] = useState([
@@ -46,6 +46,7 @@ const App = () => {
     const newArray = todos.map((todo) => todo.id === targetTodo.id ? { ...todo, status: e.target.value } : todo)
     setTodos(newArray)
   }
+  const useEffect(() => {}, [filter, todos])
 
   return (
     <>
