@@ -8,6 +8,7 @@ const App = () => {
   const [todoId, setTodoId] = useState(todos.length + 1)
   const [isEditable, setIsEditable] = useState(false)
   const [editId, setEditId] = useState('')
+  const [newTitle, setNewTitle] = useState('')
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
@@ -23,6 +24,10 @@ const App = () => {
   const handleEditOpenForm = (todo) => {
     setIsEditable(true)
     setEditId(todo.id)
+    setNewTitle(todo.title)
+  }
+  const handleEditFormChange = (e) => {
+    setNewTitle(e.target.value)
   }
   const handleEditCloseForm = () => {
     setIsEditable(false)
@@ -33,7 +38,7 @@ const App = () => {
     <>
       {isEditable ? (
       <div>
-        <input type='text' label='新しいタイトル' />
+        <input type='text' label='新しいタイトル' value={newTitle} onChange={handleEditFormChange} />
         <button>編集を保存</button>
         <button onClick={handleEditCloseForm}>キャンセル</button>
       </div>
