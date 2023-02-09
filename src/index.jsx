@@ -2,23 +2,25 @@ import ReactDOM from "react-dom";
 import React, { useEffect, useState } from "react";
 
 const App = () => {
-  const [todos, setTodos] = useState([
-  ])
+  const [todos, setTodos] = useState([])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
   const [isEditable, setIsEditable] = useState(false)
   const [editId, setEditId] = useState('')
   const [newTitle, setNewTitle] = useState('')
   const [filter, setFilter] = useState('notStarted')
-  const [filteredTodo, setFilteredTodo] = useState([])
+  const [filteredTodos, setFilteredTodos] = useState([])
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
   }
+  const resetFormInput = () => {
+    setTodoTitle('')
+  }
   const handleAddTodo = () => {
     setTodos([...todos, { id: todoId, title: todoTitle, status: 'notStarted'}])
     setTodoId(todoId + 1)
-    setTodoTitle('')
+    resetFormInput()
   }
   const handleDeleteTodo = (targetTodo) => {
     setTodos(todos.filter((todo) => targetTodo !== todo))
@@ -46,7 +48,24 @@ const App = () => {
     const newArray = todos.map((todo) => todo.id === targetTodo.id ? { ...todo, status: e.target.value } : todo)
     setTodos(newArray)
   }
-  const useEffect(() => {}, [filter, todos])
+  useEffect(() => {
+    const filteringTodos = () => {
+      switch (filter) {
+        case 'notStarted':
+          setFilteredTodos(todos.filter((todo) => todo.status === 'notStarted'))
+          break
+        case 'inProgress':
+          setFilteredTodos(todos.filter((todo) => todo.status === 'inProgress'))
+          break
+        case 'done':
+          setFilteredTodos(todos.filter((todo) => todo.status === 'done'))
+          break
+        default:
+          setFilteredTodos(todos)
+      }
+    }
+    filteringTodos()
+  }, [filter, todos])
 
   return (
     <>
@@ -68,7 +87,7 @@ const App = () => {
         </select>
       </div>)}
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
             <select value={todo.status} onChange={(e) => handleStatusChange(todo, e)}>
