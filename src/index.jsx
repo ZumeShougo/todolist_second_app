@@ -33,13 +33,20 @@ const App = () => {
     setIsEditable(false)
     setEditId('')
   }
+  const handleEditTodo = () => {
+    const newArray = todos.map((todo) => todo.id === editId ? { ...todo, title: newTitle } : todo )
+    setTodos(newArray)
+    setNewTitle('')
+    setEditId('')
+    handleEditCloseForm('')
+  }
 
   return (
     <>
       {isEditable ? (
       <div>
         <input type='text' label='新しいタイトル' value={newTitle} onChange={handleEditFormChange} />
-        <button>編集を保存</button>
+        <button onClick={handleEditTodo}>編集を保存</button>
         <button onClick={handleEditCloseForm}>キャンセル</button>
       </div>
       ) : (
