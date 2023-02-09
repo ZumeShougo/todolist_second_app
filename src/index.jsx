@@ -9,6 +9,7 @@ const App = () => {
   const [isEditable, setIsEditable] = useState(false)
   const [editId, setEditId] = useState('')
   const [newTitle, setNewTitle] = useState('')
+  const [filter, setFilter] = useState('notStarted')
   //-----------------------------------------------------//
   const handleAddFormChange = (e) => {
     setTodoTitle(e.target.value)
@@ -57,6 +58,12 @@ const App = () => {
       <div>
         <input type='text' label='タイトル' value={todoTitle} onChange={handleAddFormChange} />
         <button onClick={handleAddTodo}>作成</button>
+        <select value={filter}>
+          <option value="all">すべて</option>
+          <option value="notStarted">未着手</option>
+          <option value="inProgress">作業中</option>
+          <option value="done">完了</option>
+        </select>
       </div>)}
       <ul>
         {todos.map((todo) => (
