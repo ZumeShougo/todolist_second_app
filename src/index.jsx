@@ -14,7 +14,7 @@ const App = () => {
     setTodoTitle(e.target.value)
   }
   const handleAddTodo = () => {
-    setTodos([...todos, { id: todoId, title: todoTitle}])
+    setTodos([...todos, { id: todoId, title: todoTitle, status: 'notStarted'}])
     setTodoId(todoId + 1)
     setTodoTitle('')
   }
@@ -58,6 +58,11 @@ const App = () => {
         {todos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
+            <select value={todo.status}>
+              <option value='notStarted'>未着手</option>
+              <option value='inProgress'>作業中</option>
+              <option value='done'>完了</option>
+            </select>
             <button onClick={() => handleEditOpenForm(todo)}>編集</button>
             <button onClick={() => handleDeleteTodo(todo)}>削除</button>
           </li>
